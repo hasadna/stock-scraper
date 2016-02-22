@@ -1,6 +1,7 @@
 from models import Company as CompanyModel
 from models import MarketCap as MarketCapModel
 from models import StakeHolders as StakeHolderModel
+from models import Management as ManagementModel
 import bursa.spiders as spiders
 
 class SaveInfoItemToDB(object):
@@ -21,8 +22,8 @@ class SaveMarketCapItemToDB(object):
             return item
 
         # process item
-        if item['value'] > 0:
-            MarketCapModel.create(company=item['company_id'], value=item['cap'])
+        if item['cap'] > 0:
+            MarketCapModel.create(company=item['company_id'], cap=item['cap'])
 
 
 class SaveStakeHolderItemsToDB(object):
@@ -32,3 +33,12 @@ class SaveStakeHolderItemsToDB(object):
 
         # process item
         StakeHolderModel.create(company=item.pop('company_id'), **item)
+
+
+class SaveManagementItemsToDB(object):
+    def process_item(self, item, spider):
+        if type(spider) is not spiders.management.ManagementSpider:
+            return item
+
+        # process item
+        ManagementModel.create(company=item.pop('company_id'), **item)

@@ -52,9 +52,9 @@ class InfoSpider(scrapy.Spider):
             website=self.get_content_by_title(u':אתר', sel, link=True),
             corporate_number=self.get_content_by_title(u'מספר ברשם:', sel),
             issuer_number=self.get_content_by_title(u'מספר מנפיק:', sel),
-            industry=self.get_content_by_title(u'ענף על:', sel),
-            sector=self.get_content_by_title(u'ענף:', sel),
-            nishe=self.get_content_by_title(u'תת ענף:', sel),
+            sector=self.get_content_by_title(u'ענף על:', sel),
+            industry=self.get_content_by_title(u'ענף:', sel),
+            niche=self.get_content_by_title(u'תת ענף:', sel),
             location=self.get_content_by_title(u':מקום התאגדות', sel),
         ))
         # email: sel.xpath('//table[@class="td_Main_Company_Details"]//a[contains(@href, "mailto:")]].text()').extract()[0],
